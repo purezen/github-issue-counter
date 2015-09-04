@@ -5,5 +5,24 @@
 <% end %>
 
 <% if @values %>
-  <% binding.pry %>
+  <table>
+    <thead>
+      <th>Commit time range</th>
+      <th>Commit count</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Within the last 24 hours</td>
+        <td><%=@values[0] %></td>
+      </tr>
+      <tr>
+        <td>Within the last day and last week</td>
+        <td><%= @values[1] %></td>
+      </tr>
+      <tr>
+        <td>Older than a week</td>
+        <td><%= @values[2] %></td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>
