@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
   before_action :init_octokit
+
   def index
     if params[:search]
       issue_count = {}
