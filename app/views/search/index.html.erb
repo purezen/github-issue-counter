@@ -1,28 +1,34 @@
-<%= form_tag(search_index_path,method: "get") do %>
-  <%= label_tag "Enter repository URL:" %>
-  <%= text_field_tag :search, params[:search] %>
-  <%= submit_tag "Search" %>
-<% end %>
+<p>&nbsp;
 
-<% if @values %>
-  <table>
-    <thead>
-      <th>Commit time range</th>
-      <th>Commit count</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Within the last 24 hours</td>
-        <td><%=@values[0] %></td>
-      </tr>
-      <tr>
-        <td>Within the last day and last week</td>
-        <td><%= @values[1] %></td>
-      </tr>
-      <tr>
-        <td>Older than a week</td>
-        <td><%= @values[2] %></td>
-      </tr>
-    </tbody>
-  </table>
-<% end %>
+<div class="container">
+  <%= form_tag(search_index_path,method: "get") do %>
+    <%= label_tag "Enter repository URL:" %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search" %>
+  <% end %>
+</div>
+
+<div class="container">
+  <% if @values %>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <th>Commit time range</th>
+        <th>Commit count</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Within the last 24 hours</td>
+          <td><%=@values[0] %></td>
+        </tr>
+        <tr>
+          <td>Within the last day and last week</td>
+          <td><%= @values[1] %></td>
+        </tr>
+        <tr>
+          <td>Older than a week</td>
+          <td><%= @values[2] %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
+</div>
