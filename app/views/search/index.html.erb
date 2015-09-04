@@ -1,9 +1,9 @@
 <p>&nbsp;
 
 <div class="container">
+  <h3>Enter GitHub repository</h3>
   <%= form_tag(search_index_path,method: "get") do %>
-    <%= label_tag "Enter repository URL:" %>
-    <%= text_field_tag :search, params[:search] %>
+    <%= text_field_tag :search, params[:search], size: 50, placeholder: 'Enter repo in the form <owner-name>/<repo-name>' %>
     <%= submit_tag "Search" %>
   <% end %>
 </div>
