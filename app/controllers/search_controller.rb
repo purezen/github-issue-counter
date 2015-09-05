@@ -3,24 +3,21 @@ class SearchController < ApplicationController
 
   def index
     if params[:search]
-      issue_count = {}
+      date_count = {new: 0, mid: 0, old: 0}
       issue_dates = @client.list_issues(params[:search]).select{ |x| !x[:pull_request] }
                     .map{ |x| x[:created_at].in_time_zone('Chennai').to_date }
       issue_dates.map{ |x|
-        date_class = date_class x
-        case date_class
-        when 'new'
-          issue_count['new'] ||= 0
-          issue_count['new'] += 1
-        when 'mid'
-          issue_count['mid'] ||= 0
-          issue_count['mid'] += 1
-        when 'old'
-          issue_count['old'] ||= 0
-          issue_count['old'] += 1
+        date_diff = date_diff x
+        case date_diff
+        when 0
+          date_count[:new] += 1
+        when 1..6
+          date_count[:mid] += 1
+        else
+          date_count[:old] += 1
         end
       }
-      @values = issue_count.values
+      @values = date_count.values
     end
   end
 
@@ -31,16 +28,8 @@ class SearchController < ApplicationController
     Octokit.auto_paginate = true
   end
 
-  def date_class(date)
+  def date_diff(date)
     today = Date.today
     diff = (today - date).round
-    case diff
-    when 0
-      'new'
-    when 1..7
-      'mid'
-    else
-      'old'
-    end
   end
 end
