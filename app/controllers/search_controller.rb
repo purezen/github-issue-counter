@@ -24,6 +24,7 @@ class SearchController < ApplicationController
   private
 
   def init_octokit
+    @client ||= Octokit::Client.new(access_token: "af41f930ed1034ab54a90f9c561cd03f06e9f653")
     Octokit.auto_paginate = true
   end
 
